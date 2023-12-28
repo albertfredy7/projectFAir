@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import Logo from '../Assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { isAuthTokenContext } from '../Contexts/ContextShare';
 
 function Header({Dashboard,isLogin}) {
+
+    const {isAuthToken, setIsAuthToken} = useContext(isAuthTokenContext)
 
     const navigate = useNavigate()
     const handleLogout = () => {
         sessionStorage.removeItem("token")
         sessionStorage.removeItem("existingUser")
+        setIsAuthToken(false)
         navigate('/')
+        
     }
 
     const [showNavbar, setShowNavbar] = useState(false);

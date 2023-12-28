@@ -6,8 +6,11 @@ import Dashboard from './pages/Dashboard';
 import Project from './pages/Project';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
+import { useContext } from 'react';
+import { isAuthTokenContext } from './Contexts/ContextShare';
 
 function App() {
+  const {isAuthToken, setIsAuthToken} = useContext(isAuthTokenContext)
   return (
     <div>
 
@@ -18,7 +21,7 @@ function App() {
 
       <Route path='/register' element={<Auth register/>} />
 
-      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/dashboard' element={isAuthToken?<Dashboard  />:<Home/>} />
 
       <Route path='/project' element={<Project/>} />
     </Routes>

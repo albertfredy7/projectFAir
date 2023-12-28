@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Link, useNavigate } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import { loginAPI, registerAPI } from '../services/allAPI'
+import { isAuthTokenContext } from '../Contexts/ContextShare'
 
 function Auth({register}) {
+
+    const {isAuthToken, setIsAuthToken} = useContext(isAuthTokenContext)
     const registerForm = register?true:false 
 
     //to hold the value from input box (data that user enters for registration)
@@ -38,6 +41,7 @@ function Auth({register}) {
                     email:"",
                     password:""
                 })
+                
                 /* setuserData((prevUserData) => ({
                     ...prevUserData,
                     username: '',
@@ -80,6 +84,7 @@ function Auth({register}) {
                     email:"",
                     password:""
                 })
+                setIsAuthToken(true)
 
                 /* setuserData((prevUserData) => ({
                     ...prevUserData,
