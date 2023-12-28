@@ -1,1 +1,1 @@
-export const base_url = 'https://project-fair-backend.onrender.com'
+export const base_url = 'https://pf-backend-xi.vercel.app'
