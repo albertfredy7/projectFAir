@@ -1,1 +1,1 @@
-export const base_url = 'https://pf-backend-omega.vercel.app'
+export const base_url = 'https://pf-server-jleb.onrender.com/'
