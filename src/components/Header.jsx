@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import Logo from '../Assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header({Dashboard,isLogin}) {
+
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        sessionStorage.removeItem("token")
+        sessionStorage.removeItem("existingUser")
+        navigate('/')
+    }
+
     const [showNavbar, setShowNavbar] = useState(false);
 
     const toggleNavbar = () => {
         setShowNavbar(!showNavbar);
     };
+
+    const [token,setToken] = useState(sessionStorage.getItem("token"))
 
     return (
         <div>
@@ -21,7 +31,7 @@ function Header({Dashboard,isLogin}) {
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/project">Projects</Nav.Link>
                         </Nav>
-                        { isLogin || Dashboard ? <Button variant="outline-primary">Sign Out</Button> :
+                        {  token ? <Button variant="outline-primary" onClick={handleLogout}>Sign Out</Button> :
                             <Link to={'/login'}><Button variant="outline-primary">Sign In</Button></Link>
                         }
                         

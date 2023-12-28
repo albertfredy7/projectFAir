@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Row,Col } from 'react-bootstrap';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addProjectAPI } from '../services/allAPI';
+import { AddProjectResponseContext } from '../Contexts/ContextShare';
 
 function AddProjects() {
 
+  const {addProjectResponse, setAddProjectResponse} = useContext(AddProjectResponseContext)
   //state to hold value from input box in modal
   const [projectDetails,setProjectDetails] = useState({
     title:"",
@@ -96,6 +98,7 @@ function AddProjects() {
         if(result.status===200){
           alert('Project successfully added')
           handleClose()
+          setAddProjectResponse(result.data)
         }
         else{
           console.log(result);
